@@ -54,7 +54,7 @@ i.user_info{background: url(../image/user_info.png) no-repeat center;}
 .query_info input[type='submit']{float:left;cursor: pointer;width:50px;height:26px;border-radius: 2px;background: #388ac1;color:#fff;line-height: 26px;margin-top: 16px;}
 .query_info input:hover{background:#236b9b;}
 .query_info span{color:#aaa;line-height: 26px;padding:0 9px 0 0;margin-bottom: 5px;}
-.select_box{border:1px solid #cacbcb;height:24px;line-height: 22px;padding-left:3px;cursor:pointer;margin-bottom: 5px;position:relative;color:#323333;outline: none;font-family: SimHei;-webkit-appearance:none;background: url(../image/black_arrow.png) no-repeat 90% 9px;}
+.select_box{border:1px solid #cacbcb;height:24px;line-height: 22px;padding-left:3px;cursor:pointer;margin-bottom: 5px;position:relative;color:#323333;outline: none;font-family: SimHei;-webkit-appearance:none;-moz-appearance:none;background: url(../image/black_arrow.png) no-repeat 90% 9px;}
 .blue_arrow{background: url(../image/blue_arrow.png) no-repeat 90% 9px;}
 .w71{width:71px;}
 .w121{width:121px;}
@@ -127,7 +127,7 @@ h3.tt{height:41px;border-bottom:1px solid #e7e8eb;width:100%;background: #f4f5f6
 .detailed_content li:nth-child(3){height:145px;}
 .detailed_content li:nth-child(4){padding-top: 5px;border: 0;padding-left: 2px;}
 .detailed_content form label{float:left;line-height: 26px;cursor: pointer;}
-.detailed_content form label input{vertical-align: sub;margin-right: 8px;-webkit-appearance:none;width:14px;height:14px;background: #d5d5d5;outline: none;cursor: pointer;}
+.detailed_content form label input{vertical-align: sub;margin-right: 8px;-webkit-appearance:none;-moz-appearance:none;width:14px;height:14px;background: #d5d5d5;outline: none;cursor: pointer;}
 .detailed_content form label input:checked{background:#d5d5d5 url(../image/gou.png) no-repeat center; }
 .detailed_content form span{display: inline-block;}
 .detailed_content form input[type="submit"]{float:right;width:50px;height:26px;line-height: 26px;text-align: center;background:#388ac1;color:#fff;border-radius: 2px;cursor: pointer;}
