@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    ul{list-style: none;position:relative;height:200px;}
+    li{position:absolute;bottom:0;width:20px;background:red;border:1px solid #fff;box-sizing:border-box;}
+  </style>
+</head>
+<body>
+  <input type="text" id='text'>
+  <button id='leftIn'>左侧入</button>
+  <button id='rightIn'>右侧入</button>&nbsp;
+  <button id='leftOut'>左侧出</button>
+  <button id='rightOut'>右侧出</button>
+  <button id='randomData'>随机60组数据</button>
+  <button id='queSort'>排序</button>
+  <ul id='queueContent'>
+  </ul>
+
+
+  <script>
+  function $(idName){
+    return document.getElementById(idName);
+  }
+  function Queue(){
+    this.data=[];
+  }
+  Queue.prototype.randomData=function(){
+    this.data.length=0;
+    for(var i=0 ;i<60;i++){
+      this.data.push(Math.round(Math.random()*90+10));
+    }
+    this.updateView();
+  }
+  Queue.prototype.leftIn=function(){
+    var val=$('text').value;
+    if(!(/(?:^[1-9]\d$)|(?:^100$)/.test(val))){alert('请输入10-100之间的整数');return;}
+    if(this.data.length == 60){alert('最多60个');return;}
+    this.data.unshift(val);
+    this.updateView();
+  }
+   Queue.prototype.rightIn=function(){
+    var val=$('text').value;
+    if(!(/(?:^[1-9]\d$)|(?:^100$)/.test(val))){alert('请输入10-100之间的整数');return;}
+    if(this.data.length == 60){alert('最多60个');return;}
+    this.data.push(val);
+    this.updateView();
+  }
+  Queue.prototype.leftOut=function(){
+    this.data.shift();
+    this.updateView();
+  }
+   Queue.prototype.rightOut=function(){
+    this.data.pop();
+    this.updateView();
+  }
+  Queue.prototype.queSort=function(){
+    var Jval=0,self=this,data=self.data,callback=self.updateView;
+    sort(data,callback);
+    function sort(arr,callback){
+       for(var i=sort.i || 0;i<arr.length;i++){
+          for(var j=i+1;j<arr.length;j++){
+            if(arr[i] > arr[j] ){
+              Jval=arr[j];
+              arr[j]=arr[i];
+              arr[i]=Jval;
+              if(callback.call(self)){
+                setTimeout(function(){
+                  sort(arr,callback);
+                },10)
+              }
+              return;
+            }
+          }
+        }
+    }
+  }
+  Queue.prototype.updateView=function(){
+    var dUl=$('queueContent');
+    dUl.innerHTML='';
+    var count=0;
+    for(var i=0 ;i < this.data.length;i++){
+      var dLi=document.createElement('li');
+      dLi.style.height=this.data[i]+'%';
+      dLi.style.left=count*20+'px';
+      dUl.appendChild(dLi);
+      count++;
+    }
+    $('text').value='';
+    return true;
+  }
+  var que=new Queue();
+  $('leftIn').onclick=function(){
+    que.leftIn();
+  }
+  $('rightIn').onclick=function(){
+    que.rightIn();
+  }
+  $('leftOut').onclick=function(){
+    que.leftOut();
+  }
+  $('rightOut').onclick=function(){
+    que.rightOut();
+  }
+  $('randomData').onclick=function(){
+    que.randomData();
+  }
+   $('queSort').onclick=function(){
+    que.queSort();
+  }
+
+  </script>
+</body>
+</html>
