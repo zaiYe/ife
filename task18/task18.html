@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    ul{list-style: none;}
+    li{padding:10px;line-height: 20px;font-size: 16px;background: red;float:left;border: 1px solid #000;font-weight: bold;color:#fff;margin-right: 10px;}
+  </style>
+</head>
+<body>
+  <input type="text" id='text'>
+  <button id='leftIn'>左侧入</button>
+  <button id='rightIn'>右侧入</button>&nbsp;
+  <button id='leftOut'>左侧出</button>
+  <button id='rightOut'>右侧出</button>
+  <ul id='queueContent'>
+  </ul>
+
+
+  <script>
+  function $(idName){
+    return document.getElementById(idName);
+  }
+  function Queue(){
+    this.data=[];
+  }
+  Queue.prototype.leftIn=function(){
+    var val=$('text').value;
+    this.data.unshift(val);
+    this.updateView();
+  }
+   Queue.prototype.rightIn=function(){
+    var val=$('text').value;
+    this.data.push(val);
+    this.updateView();
+  }
+  Queue.prototype.leftOut=function(){
+    this.data.shift();
+    this.updateView();
+  }
+   Queue.prototype.rightOut=function(){
+    this.data.pop();
+    this.updateView();
+  }
+  Queue.prototype.updateView=function(){
+    var dUl=$('queueContent');
+    dUl.innerHTML='';
+    for(var i=0 ;i < this.data.length;i++){
+      var dLi=document.createElement('li');
+      dLi.innerHTML=this.data[i];
+      dUl.appendChild(dLi);
+    }
+    $('text').innerHTML='';
+  }
+  var que=new Queue();
+  $('leftIn').onclick=function(){
+    que.leftIn();
+  }
+  $('rightIn').onclick=function(){
+    que.rightIn();
+  }
+  $('leftOut').onclick=function(){
+    que.leftOut();
+  }
+  $('rightOut').onclick=function(){
+    que.rightOut();
+  }
+  </script>
+</body>
+</html>

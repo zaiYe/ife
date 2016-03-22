@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    ul{list-style: none;}
+    li{padding:10px;line-height: 20px;font-size: 16px;background: red;float:left;border: 1px solid #000;font-weight: bold;color:#fff;margin-right: 10px;}
+    li.cur{background: green;}
+  </style>
+</head>
+<body>
+  <p>回车来分配数据</p>
+  <textarea type="text" id='text'></textarea>
+  <button id='leftIn'>左侧入</button>
+  <button id='rightIn'>右侧入</button>&nbsp;
+  <button id='leftOut'>左侧出</button>
+  <button id='rightOut'>右侧出</button>
+  <input type="text" id='search'>
+  <button id='searchBtn'>查询</button>
+  <ul id='queueContent'>
+  </ul>
+
+
+  <script>
+  function $(idName){
+    return document.getElementById(idName);
+  }
+  function Queue(){
+    this.data=[];
+  }
+  Queue.prototype.searchInfo=function(str){
+    for(var i=0;i<this.data.length;i++){
+      if(this.data[i].indexOf(str) != -1){
+        $('queueContent').getElementsByTagName('li')[i].className='cur';
+      }
+    }
+  }
+  Queue.prototype.leftIn=function(valArr){
+    
+    this.data=valArr.concat(this.data);
+    this.updateView();
+  }
+   Queue.prototype.rightIn=function(valArr){
+    this.data=this.data.concat(valArr);
+    this.updateView();
+  }
+  Queue.prototype.leftOut=function(){
+    this.data.shift();
+    this.updateView();
+  }
+   Queue.prototype.rightOut=function(){
+    this.data.pop();
+    this.updateView();
+  }
+  Queue.prototype.updateView=function(){
+    var dUl=$('queueContent');
+    dUl.innerHTML='';
+    for(var i=0 ;i < this.data.length;i++){
+      var dLi=document.createElement('li');
+      dLi.innerHTML=this.data[i];
+      dUl.appendChild(dLi);
+    }
+    $('text').value='';
+  }
+  var que=new Queue();
+  var text=$('text');
+  var search=$('search');
+  $('leftIn').onclick=function(){
+    var valArr=text.value.split('\n');
+    que.leftIn(valArr);
+  }
+  $('rightIn').onclick=function(){
+    var valArr=text.value.split('\n');
+    que.rightIn(valArr);
+  }
+  $('leftOut').onclick=function(){
+    que.leftOut();
+  }
+  $('rightOut').onclick=function(){
+    que.rightOut();
+  }
+   $('searchBtn').onclick=function(){
+    var str=search.value;
+    que.updateView();
+    que.searchInfo(str);
+  }
+  </script>
+</body>
+</html>
